@@ -127,7 +127,7 @@ class _RecipeDetailsWidgetState extends State<RecipeDetailsWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 _buildInfo('${item?.info?.cookingTime??'??'} min', Icons.access_time),
-                _buildInfo('${item?.stars?.toStringAsFixed(2)??'??'} rate', Icons.star_border),
+                _buildInfo('${item?.stars?.toStringAsFixed(1)??'??'} rate', Icons.star_border),
                 _buildInfo('${item?.info?.kcal??'??'} kcal', Icons.whatshot)
               ],
             )

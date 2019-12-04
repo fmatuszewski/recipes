@@ -261,7 +261,7 @@ class _RecipesWidgetState extends State<RecipesWidget> {
               ),
             ),
             Container(
-                width: 60,
+                width: 55,
                 margin: EdgeInsets.symmetric(vertical: 5),
                 padding: EdgeInsets.all(5),
                 decoration: BoxDecoration(
@@ -277,7 +277,7 @@ class _RecipesWidgetState extends State<RecipesWidget> {
                     Padding(
                       padding: const EdgeInsets.only(left: 8.0),
                       child: Text(
-                        item.stars.toStringAsFixed(2),
+                        item.stars.toStringAsFixed(1),
                         style: TextStyle(
                             fontSize: 10, fontWeight: FontWeight.w700),
                       ),
