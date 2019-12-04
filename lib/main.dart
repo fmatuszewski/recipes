@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:recepie/recipes.dart';
+import 'package:recepie/pages/recipes.dart';
+import 'package:recepie/routing/route_names.dart';
+import 'package:recepie/routing/routing.dart' as routing;
 
 void main() => runApp(MyApp());
 
@@ -18,6 +20,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: RecipesWidget(),
+      onGenerateRoute: routing.generateRoute,
+      initialRoute: RouteNames.recipes,
     );
   }
 }

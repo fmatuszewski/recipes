@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:recepie/icons/food_icons.dart';
 import 'package:recepie/model/item.dart';
+import 'package:recepie/routing/route_names.dart';
 
 class RecipesWidget extends StatefulWidget {
   @override
@@ -32,10 +33,11 @@ class _RecipesWidgetState extends State<RecipesWidget> {
           children: <Widget>[
             Expanded(
               child: Container(
-                decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-
-                )),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                    )),
                 child: SingleChildScrollView(
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -187,16 +189,34 @@ class _RecipesWidgetState extends State<RecipesWidget> {
   List<Item> _items = [
     Item(
         asset: "assets/images/food.png",
-        title: "Royal Paddington Thai Salad",
-        stars: 9.0),
+        title: "Royal Paddington \nThai Salad",
+        stars: 9.0,
+        info: Info(cookingTime: 45, kcal: 215),
+        ingredients: [
+          Ingredient(name: 'Noodles', weight: 450),
+          Ingredient(name: 'Butter', weight: 200),
+          Ingredient(name: 'Lemon', weight: 10),
+        ]),
     Item(
         asset: "assets/images/food.png",
-        title: "Noodles with chicken",
-        stars: 8.5),
+        title: "Noodles with \nchicken",
+        stars: 8.5,
+        info: Info(cookingTime: 30, kcal: 200),
+        ingredients: [
+          Ingredient(name: 'Noodles', weight: 450),
+          Ingredient(name: 'Butter', weight: 200),
+          Ingredient(name: 'Lemon', weight: 10),
+        ]),
     Item(
         asset: "assets/images/food.png",
-        title: "Fresh Shrimps salad",
-        stars: 8.0),
+        title: "Fresh Shrimps \nsalad",
+        stars: 8.0,
+        info: Info(cookingTime: 25, kcal: 198),
+        ingredients: [
+          Ingredient(name: 'Noodles', weight: 450),
+          Ingredient(name: 'Butter', weight: 200),
+          Ingredient(name: 'Lemon', weight: 10),
+        ]),
   ];
 
   List<Color> _itemColors = [
@@ -221,43 +241,50 @@ class _RecipesWidgetState extends State<RecipesWidget> {
       margin: EdgeInsets.all(8),
       decoration: BoxDecoration(
           color: backgroundColor, borderRadius: BorderRadius.circular(25)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(item.asset),
-          ),
-          Expanded(
-            child: Text(
-              item.title,
-              maxLines: 2,
-              style: TextStyle(fontSize: 12),
+      child: InkWell(
+        onTap: () {
+          Navigator.of(context)
+              .pushNamed(RouteNames.recipe_details, arguments: item);
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset(item.asset),
             ),
-          ),
-          Container(
-              width: 60,
-              margin: EdgeInsets.symmetric(vertical: 5),
-              padding: EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(15)),
-              child: Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.star,
-                    color: Color(0xffFD9B09),
-                    size: 15,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(
-                      item.stars.toStringAsFixed(2),
-                      style:
-                          TextStyle(fontSize: 10, fontWeight: FontWeight.w700),
+            Expanded(
+              child: Text(
+                item.title,
+                maxLines: 2,
+                style: TextStyle(fontSize: 12),
+              ),
+            ),
+            Container(
+                width: 60,
+                margin: EdgeInsets.symmetric(vertical: 5),
+                padding: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15)),
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.star,
+                      color: Color(0xffFD9B09),
+                      size: 15,
                     ),
-                  )
-                ],
-              ))
-        ],
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Text(
+                        item.stars.toStringAsFixed(2),
+                        style: TextStyle(
+                            fontSize: 10, fontWeight: FontWeight.w700),
+                      ),
+                    )
+                  ],
+                ))
+          ],
+        ),
       ));
 }
